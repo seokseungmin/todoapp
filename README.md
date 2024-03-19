@@ -12,16 +12,31 @@ Docker 연동
 
 ##Docker Terminal Command
 
+```
+1단계
 docker stop $(docker ps -q)
 docker rm $(docker ps -a -q)
 docker rmi -f $(docker images -q)
 
+#필요없음
 docker network rm docker-compose_default
 docker network rm docker-compose_net-mysql
 
+2단계
 ./gradlew build   
 
+3단계
 docker network ls
 docker network rm todoapp_default
- 
-docker-compose up -d   
+
+4단계
+docker-compose up -d
+
+5단계
+Docker -> todoapp-db-1 -> Exec
+mysql -u root -p
+root 비밀번호 입력
+show databases;
+use todoapp;
+select * from device_info;
+```
