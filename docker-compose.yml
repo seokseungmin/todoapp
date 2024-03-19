@@ -1,3 +1,31 @@
+#version: '3.8'
+#services:
+#  app:
+#    build: .
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/todoapp?useSSL=false&serverTimezone=UTC
+#      SPRING_DATASOURCE_USERNAME: root
+#      SPRING_DATASOURCE_PASSWORD: "*seoksm1017*"
+#    depends_on:
+#      - db
+#
+#  db:
+#    image: mysql:8.0.31
+#    environment:
+#      MYSQL_DATABASE: todoapp
+#      MYSQL_ROOT_PASSWORD: "*seoksm1017*"
+#      MYSQL_USER: root
+#    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+#    ports:
+#      - "3307:3306" # 왼쪽은 호스트 포트, 오른쪽은 컨테이너 포트
+#    volumes:
+#      - db-data:/var/lib/mysql
+#
+#volumes:
+#  db-data:
+
 version: '3.8'
 services:
   app:
@@ -5,23 +33,25 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/todoapp?useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3307/todoapp?useSSL=false&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: "*seoksm1017*"
     depends_on:
       - db
 
+  #jdbc:mysql://localhost:3307/todoapp?useSSL=false&serverTimezone=UTC
   db:
     image: mysql:8.0.31
     environment:
       MYSQL_DATABASE: todoapp
-      MYSQL_ROOT_PASSWORD: "*seoksm1017*"
-      MYSQL_USER: root
-    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER_PASSWORD: 1234
+    #command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
-      - "3306:3306" # 왼쪽은 호스트 포트, 오른쪽은 컨테이너 포트
+      - "3307:3306" # 왼쪽은 호스트 포트, 오른쪽은 컨테이너 포트
     volumes:
       - db-data:/var/lib/mysql
 
 volumes:
   db-data:
+
