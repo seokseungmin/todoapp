@@ -10,3 +10,18 @@ Docker 연동
 
 <img src="https://skillicons.dev/icons?i=idea,spring,gradle,java,mysql,html,docker"/>
 
+##Docker Terminal Command
+
+docker stop $(docker ps -q)
+docker rm $(docker ps -a -q)
+docker rmi -f $(docker images -q)
+
+docker network rm docker-compose_default
+docker network rm docker-compose_net-mysql
+
+./gradlew build   
+
+docker network ls
+docker network rm todoapp_default
+ 
+docker-compose up -d   
